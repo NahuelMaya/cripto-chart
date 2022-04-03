@@ -1,22 +1,16 @@
 import React from 'react'
-import { getCurrencyHistory } from '../actions/actions'
-import { UseChartContext } from '../hooks/useChartContext'
 
 interface Props {
     name: string,
-    value: number
+    value: number,
+    onClick: any
 }
-function Card({ name, value }: Props) {
-    const [, dispatch] = UseChartContext()
-    const handleCardClick = () => {
-        getCurrencyHistory(dispatch, name)
-    }
-
+function Card({ name, value, onClick }: Props) {
     return (
         <div
             className="text-sm flex items-center bg-gray-600 text-white text bold p-5 justify-center h-4"
             key={name}
-            onClick={handleCardClick}
+            onClick={() => onClick(name)}
         >
             <p >{`${name}:`}</p>
             <div className="ml-5">{value}</div>

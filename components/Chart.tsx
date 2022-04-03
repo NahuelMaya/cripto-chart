@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import { UseChartContext } from '../hooks/useChartContext'
+import Loading from './Loading'
 
 ChartJS.register(
     CategoryScale,
@@ -21,7 +22,7 @@ ChartJS.register(
     Legend
 );
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+//const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const colors = [
     'red',
     'orange',
@@ -33,19 +34,7 @@ const colors = [
     'purple',
 ];
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(() => 300),
-        },
-        {
-            label: 'Dataset 2',
-            data: labels.map(() => 300),
-        },
-    ],
-};
+
 
 function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
     const colorStart = 'blue';
@@ -66,23 +55,30 @@ export default function CurrencyChart() {
     const [chartData, setChartData] = useState<ChartData<'bar'>>({
         datasets: [],
     });
-    const [state, dispatch] = UseChartContext()
+    const [state] = UseChartContext()
+
+    const { chartSelected, data, loading } = state
+
     useEffect(() => {
         const chart = chartRef.current;
 
         if (!chart) {
             return;
         }
-
-        const chartData = {
-            ...data,
-            datasets: data.datasets.map(dataset => ({
-                ...dataset,
-                borderColor: createGradient(chart.ctx, chart.chartArea),
-            })),
+        if (!!data && data[chartSelected].length > 0) {
+            const chartData = {
+                labels: data[chartSelected].map((e: { date: string; }) => e.date).reverse(),
+                datasets: [
+                    {
+                        label: chartSelected,
+                        data: data[chartSelected].map((e: { value: number; }) => e.value),
+                        borderColor: createGradient(chart.ctx, chart.chartArea),
+                    },
+                ],
+            }
+            setChartData(chartData);
         };
-        setChartData(chartData);
-    }, []);
+    }, [data]);
 
-    return <Chart ref={chartRef} type='line' data={chartData} />;
+    return loading ? <Loading /> : <Chart ref={chartRef} type='line' data={chartData} />;
 }

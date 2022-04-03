@@ -1,14 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useCallback } from 'react'
 import { UseCurrenciesContext } from '../hooks/useCurrenciesContext'
-import { fetchCurrencies } from '../actions/actions'
+import { UseChartContext } from '../hooks/useChartContext'
+import { fetchCurrencies, getCurrencyHistory } from '../actions/actions'
 import { MemoizedCard } from './Card'
 
 function Currencies() {
-    const [state, dispatch] = UseCurrenciesContext()
-    const { currencies } = state
+    const [currencyState, currencyDispatch] = UseCurrenciesContext()
+    const { currencies } = currencyState
 
     useEffect(() => {
-        fetchCurrencies(dispatch)
+        fetchCurrencies(currencyDispatch)
+    }, [])
+
+    const [chartState, chartDispatch] = UseChartContext()
+
+    const handleCardClick = useCallback(name => {
+        getCurrencyHistory(chartDispatch, name)
     }, [])
 
     return (
@@ -17,7 +24,7 @@ function Currencies() {
                 currencies !== null &&
                 <div className='grid grid-cols-8 gap-4 p-5 content-center'>
                     {
-                        Object.keys(currencies).map(key => <MemoizedCard name={key} value={currencies[key]} />)
+                        Object.keys(currencies).map(key => <MemoizedCard name={key} value={currencies[key]} key={key} onClick={handleCardClick} />)
                     }
                 </div>
             }

@@ -1,72 +1,24 @@
 import { createContext, useReducer, useContext, Dispatch } from 'react'
 import { chartActionsTypes } from '../constants/actions'
-
-
-// interface Currency {
-//     [key: string]: number
-// }
-
 interface chartActions {
     type: string
     payload?: any
 }
-
-// interface Currencies {
-//     currencies: Currency | null,
-//     loading: boolean
-//     error: boolean
-// }
-
 interface Charts {
+    chartSelected: string,
     data: any | null,
     loading: boolean
     error: boolean
 }
-// const currenciesInitState: Currencies = {
-//     currencies: null,
-//     loading: false,
-//     error: false
-// }
 
 const chartsInitState: Charts = {
+    chartSelected: '',
     data: null,
     loading: false,
     error: false
 }
 
 const ChartContext = createContext<[Charts, Dispatch<chartActionsTypes>]>([{ ...chartsInitState }, () => { }])
-//const CurrenciesContext = createContext<[Currencies, Dispatch<chartActionsTypes>]>([{ ...currenciesInitState }, () => { }])
-
-// function currenciesReducer(state: Currencies, action: chartActions): Currencies {
-//     const { type, payload } = action
-//     switch (type) {
-//         case 'CURRENCIES_REQUEST_START': {
-//             return {
-//                 ...state,
-//                 loading: true,
-//                 error: false
-//             }
-//         }
-//         case 'CURRENCIES_REQUEST_SUCCESS': {
-//             return {
-//                 ...state,
-//                 currencies: payload,
-//                 loading: false,
-//                 error: false
-//             }
-//         }
-//         case 'CURRENCIES_REQUEST_ERROR': {
-//             return {
-//                 ...state,
-//                 loading: false,
-//                 error: true
-//             }
-//         }
-//         default:
-//             return state
-//     }
-// }
-
 
 function chartReducer(state: Charts, action: chartActions): Charts {
     const { type, payload } = action
@@ -81,7 +33,8 @@ function chartReducer(state: Charts, action: chartActions): Charts {
         case 'GET_CURRENCY_INFO_REQUEST_SUCCESS': {
             return {
                 ...state,
-                data: { ...payload },
+                data: { ...state.data, [payload.key]: [...payload.days] },
+                chartSelected: payload.key,
                 loading: false,
                 error: false
             }
@@ -112,20 +65,3 @@ export function UseChartContext() {
     }
     return context
 }
-
-
-// export const CurrenciesContextProvider = (props: any) => {
-//     const [state, dispatch] = useReducer(currenciesReducer, currenciesInitState)
-//     return (
-//         <CurrenciesContext.Provider value={[state, dispatch]} {...props} />
-//     )
-// }
-
-// export function UseCurrenciesContext() {
-//     const context = useContext(CurrenciesContext)
-//     if (!context) {
-//         throw new Error('useCurrenciesContext must be used within the CurrenciesContextProvider')
-//     }
-//     return context
-// }
-

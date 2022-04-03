@@ -13,11 +13,11 @@ const Home: NextPage = () => {
         <title>Chart Page</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>CHOOSE YOUR CURRENCY</h1>
-      <CurrenciesContextProvider >
-        <Currencies />
-      </CurrenciesContextProvider>
+      <h1 className='pl-5 mt-3'>CHOOSE YOUR CURRENCY</h1>
       <ChartContextProvider>
+        <CurrenciesContextProvider >
+          <Currencies />
+        </CurrenciesContextProvider>
         <CurrencyChart />
       </ChartContextProvider>
 
@@ -26,8 +26,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
-
-// const key = 'fa56b50ffb135c757990c440f199d188'
-// const url = 'http://api.exchangeratesapi.io/v1/timeseries?access_key='
-// const currencies = 'http://api.exchangeratesapi.io/v1/latest?access_key=fa56b50ffb135c757990c440f199d188&format=1'
