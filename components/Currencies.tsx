@@ -19,7 +19,7 @@ function Currencies() {
     }, [])
 
     return (
-        <section className='w-full overflow-y-auto h-80 top-0'>
+        <section className={`w-full overflow-y-auto h-80 top-0 ${chartState.loading && 'pointer-events-none'}`}>
             {
                 currencies !== null &&
                 <div className='grid grid-cols-8 gap-4 p-5 content-center'>

@@ -80,5 +80,5 @@ export default function CurrencyChart() {
         };
     }, [data]);
 
-    return loading ? <Loading /> : <Chart ref={chartRef} type='line' data={chartData} />;
+    return loading ? <Loading /> : <Chart className='p-10 ' ref={chartRef} type='line' data={chartData} />;
 }
