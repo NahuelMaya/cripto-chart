@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { UseCurrenciesContext } from '../hooks/useChartContext'
+import { UseCurrenciesContext } from '../hooks/useCurrenciesContext'
 import { fetchCurrencies } from '../actions/actions'
 import { MemoizedCard } from './Card'
 

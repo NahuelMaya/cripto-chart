@@ -1,32 +1,32 @@
-import { createContext, useReducer, useContext, Dispatch, useCallback, useState } from 'react'
+import { createContext, useReducer, useContext, Dispatch } from 'react'
 import { chartActionsTypes } from '../constants/actions'
 
 
-interface Currency {
-    [key: string]: number
-}
+// interface Currency {
+//     [key: string]: number
+// }
 
 interface chartActions {
     type: string
     payload?: any
 }
 
-interface Currencies {
-    currencies: Currency | null,
-    loading: boolean
-    error: boolean
-}
+// interface Currencies {
+//     currencies: Currency | null,
+//     loading: boolean
+//     error: boolean
+// }
 
 interface Charts {
     data: any | null,
     loading: boolean
     error: boolean
 }
-const currenciesInitState: Currencies = {
-    currencies: null,
-    loading: false,
-    error: false
-}
+// const currenciesInitState: Currencies = {
+//     currencies: null,
+//     loading: false,
+//     error: false
+// }
 
 const chartsInitState: Charts = {
     data: null,
@@ -35,37 +35,37 @@ const chartsInitState: Charts = {
 }
 
 const ChartContext = createContext<[Charts, Dispatch<chartActionsTypes>]>([{ ...chartsInitState }, () => { }])
-const CurrenciesContext = createContext<[Currencies, Dispatch<chartActionsTypes>]>([{ ...currenciesInitState }, () => { }])
+//const CurrenciesContext = createContext<[Currencies, Dispatch<chartActionsTypes>]>([{ ...currenciesInitState }, () => { }])
 
-function currenciesReducer(state: Currencies, action: chartActions): Currencies {
-    const { type, payload } = action
-    switch (type) {
-        case 'CURRENCIES_REQUEST_START': {
-            return {
-                ...state,
-                loading: true,
-                error: false
-            }
-        }
-        case 'CURRENCIES_REQUEST_SUCCESS': {
-            return {
-                ...state,
-                currencies: payload,
-                loading: false,
-                error: false
-            }
-        }
-        case 'CURRENCIES_REQUEST_ERROR': {
-            return {
-                ...state,
-                loading: false,
-                error: true
-            }
-        }
-        default:
-            return state
-    }
-}
+// function currenciesReducer(state: Currencies, action: chartActions): Currencies {
+//     const { type, payload } = action
+//     switch (type) {
+//         case 'CURRENCIES_REQUEST_START': {
+//             return {
+//                 ...state,
+//                 loading: true,
+//                 error: false
+//             }
+//         }
+//         case 'CURRENCIES_REQUEST_SUCCESS': {
+//             return {
+//                 ...state,
+//                 currencies: payload,
+//                 loading: false,
+//                 error: false
+//             }
+//         }
+//         case 'CURRENCIES_REQUEST_ERROR': {
+//             return {
+//                 ...state,
+//                 loading: false,
+//                 error: true
+//             }
+//         }
+//         default:
+//             return state
+//     }
+// }
 
 
 function chartReducer(state: Charts, action: chartActions): Charts {
@@ -114,18 +114,18 @@ export function UseChartContext() {
 }
 
 
-export const CurrenciesContextProvider = (props: any) => {
-    const [state, dispatch] = useReducer(currenciesReducer, currenciesInitState)
-    return (
-        <CurrenciesContext.Provider value={[state, dispatch]} {...props} />
-    )
-}
+// export const CurrenciesContextProvider = (props: any) => {
+//     const [state, dispatch] = useReducer(currenciesReducer, currenciesInitState)
+//     return (
+//         <CurrenciesContext.Provider value={[state, dispatch]} {...props} />
+//     )
+// }
 
-export function UseCurrenciesContext() {
-    const context = useContext(CurrenciesContext)
-    if (!context) {
-        throw new Error('useCurrenciesContext must be used within the CurrenciesContextProvider')
-    }
-    return context
-}
+// export function UseCurrenciesContext() {
+//     const context = useContext(CurrenciesContext)
+//     if (!context) {
+//         throw new Error('useCurrenciesContext must be used within the CurrenciesContextProvider')
+//     }
+//     return context
+// }
 

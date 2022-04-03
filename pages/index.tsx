@@ -1,7 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Currencies from '../components/Currencies';
-import { CurrenciesContextProvider, ChartContextProvider } from '../hooks/useChartContext'
+import CurrencyChart from '../components/Chart';
+import { ChartContextProvider } from '../hooks/useChartContext'
+import { CurrenciesContextProvider } from '../hooks/useCurrenciesContext'
 
 
 const Home: NextPage = () => {
@@ -16,7 +18,7 @@ const Home: NextPage = () => {
         <Currencies />
       </CurrenciesContextProvider>
       <ChartContextProvider>
-        <p>Chart</p>
+        <CurrencyChart />
       </ChartContextProvider>
 
     </div>
