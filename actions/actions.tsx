@@ -2,6 +2,7 @@
 import { Dispatch } from 'react'
 import { format, subDays } from 'date-fns'
 import { chartActionsTypes, chartActions } from '../constants/actions'
+import { key } from '../constants/key'
 type dayInfo = {
     date: string,
     value: number
@@ -10,9 +11,6 @@ interface ChartInfo {
     key: string,
     days: dayInfo[]
 }
-
-const key = '55278eca49a912b35b87bc4c9a4fef46'
-
 
 export const fetchCurrencies = (dispatch: Dispatch<chartActionsTypes>) => {
     dispatch({ type: chartActions.CURRENCIES_REQUEST_START })
