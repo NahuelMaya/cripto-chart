@@ -13,7 +13,7 @@ function Card({ name, value, onClick }: Props) {
             onClick={() => onClick(name)}
         >
             <p >{`${name}:`}</p>
-            <div className="ml-5">{value}</div>
+            <div className="ml-5">{(Math.round(value * 100) / 100).toFixed(2)}</div>
         </div>
     )
 }
