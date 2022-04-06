@@ -24,6 +24,8 @@ function chartReducer(state: Charts, action: chartActions): Charts {
     const { type, payload } = action
     switch (type) {
         case 'GET_CURRENCY_INFO_REQUEST_START': {
+            console.log('entre GET_CURRENCY_INFO_REQUEST_START')
+
             return {
                 ...state,
                 loading: true,
@@ -31,6 +33,7 @@ function chartReducer(state: Charts, action: chartActions): Charts {
             }
         }
         case 'GET_CURRENCY_INFO_REQUEST_SUCCESS': {
+            console.log('entre GET_CURRENCY_INFO_REQUEST_SUCCESS')
             return {
                 ...state,
                 data: { ...state.data, [payload.key]: [...payload.days] },

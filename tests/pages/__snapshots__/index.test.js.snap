@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home test Should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <h1
+      class="pl-5 mt-3"
+    >
+      CHOOSE YOUR CURRENCY
+    </h1>
+    <section
+      class="w-full overflow-y-auto h-80 top-0 false"
+    >
+      <div
+        class="z-50 overflow-hidden opacity-75 flex flex-col items-center justify-center "
+      >
+        <div
+          class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 mt-32"
+        />
+        <p>
+          Loading
+        </p>
+      </div>
+    </section>
+    <canvas
+      class="p-10 "
+      height="0"
+      role="img"
+      style="display: block; box-sizing: border-box; height: 0px; width: 0px;"
+      width="0"
+    />
+  </div>
+</DocumentFragment>
+`;

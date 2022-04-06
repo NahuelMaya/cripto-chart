@@ -1,7 +1,10 @@
 import { createContext, useReducer, useContext, Dispatch } from 'react'
 import { chartActionsTypes } from '../constants/actions'
 
-
+interface currenciesActions {
+    type: string
+    payload?: any
+}
 interface Currency {
     [key: string]: number
 }
@@ -21,7 +24,7 @@ const currenciesInitState: Currencies = {
 const CurrenciesContext = createContext<[Currencies, Dispatch<chartActionsTypes>]>([{ ...currenciesInitState }, () => { }])
 
 
-function currenciesReducer(state: Currencies, action: chartActions): Currencies {
+function currenciesReducer(state: Currencies, action: currenciesActions): Currencies {
     const { type, payload } = action
     switch (type) {
         case 'CURRENCIES_REQUEST_START': {

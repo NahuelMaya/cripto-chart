@@ -44,7 +44,6 @@ export const getCurrencyHistory = async (dispatch: Dispatch<chartActionsTypes>, 
             })
     }
     dispatch({ type: chartActions.GET_CURRENCY_INFO_REQUEST_SUCCESS, payload: chartInfo })
-
 }
 
 
